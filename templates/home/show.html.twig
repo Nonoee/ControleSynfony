@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+{% block title %} {{contact.nom}},  {{contact.prenom}}
+{% endblock %}
+{% block body %}
+
+    <div class="ad-title" style="background-image: url({{ contact.urlAvatar }})">
+        <div class="container">
+            <h1>{{contact.nom}},  {{contact.prenom}}</h1>
+            <p class="h2">
+                {{ contact.adresse }},<br>
+                {{ contact.codepostal }},<br>
+                {{contact.ville}},<br>
+                {{ contact.numTel }},<br>
+                {{ contact.adresseMail }}.<br>
+            </p>
+        </div>
+    </div>
+{% endblock %}
