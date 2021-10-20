@@ -6,6 +6,7 @@
 <div class="container">
     <h1 class="my-3">Voici les contacts !</h1>
     <div class="row">
+    <a href='{{path('contact_create')}}' class='btn btn-primary'>Crée votre contact</a>
         {% for contact in contacts %}
             <div class="col-md-4">
                 <div class="card bg-ligh mb-3">
@@ -24,6 +25,7 @@
                                 </a>
                             </h4>
                             <a href="{{path('contact_show',{'id': contact.id})}}" class="btn btn-secondary">En savoir +</a>
+                            <a href="{{path('contact_delete',{'id': contact.id})}}" class="btn btn-danger">Supprimer</a>
                         </div>
                     </div>
                 </div>

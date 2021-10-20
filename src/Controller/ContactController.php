@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Entity\Contact;
+use App\Form\ContactType;
 use App\Form\NouvelleAnnonceType;
 use App\Repository\ContactRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -39,7 +40,7 @@ class ContactController extends AbstractController{
     public function create(Request $request, EntityManagerInterface $manager){
         $contact= new Contact(); 
 
-        $form= $this->createForm(NouvelleAnnonceType::class, $contact);
+        $form= $this->createForm(ContactType::class, $contact);
 
         $form->handleRequest($request);
 
@@ -56,7 +57,7 @@ class ContactController extends AbstractController{
             );
 
 
-            return $this->redirectToRoute('article_show', [
+            return $this->redirectToRoute('contact_show', [
                 'id' => $contact->getId()
             ]);
         }
@@ -65,6 +66,26 @@ class ContactController extends AbstractController{
         return $this->render('home/new.html.twig', [
             'form' => $form->createView()
         ]);
+    }
+
+
+    /**
+     * Permet de supprimé un article
+     *
+     * @Route("/contact/delete/{id}", name="contact_delete")
+     * 
+     */
+    public function delete(Contact $contact,EntityManagerInterface $manager)
+    {
+        
+        $manager->remove($contact);
+        $manager->flush();
+
+        $this->addFlash(
+            'success',
+            "le contact a bien été supprimée");
+
+        return $this->redirectToRoute("contact_index");
     }
 
     /**
