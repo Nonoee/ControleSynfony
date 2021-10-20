@@ -1,9 +1,22 @@
 <?php
 
 namespace App\Entity;
-
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use App\Repository\ContactRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+/**
+ * @ORM\Entity(repositoryClass=ContactRepository::class)
+ */
+/**
+ * @ORM\Entity(repositoryClass=ContactRepository::class)
+ * @ORM\HasLifecycleCallbacks
+ *@UniqueEntity(
+     fields={"adresseMail"}
+     ,message="Un autre contact possède déjà ce titre")
+ */
 
 /**
  * @ORM\Entity(repositoryClass=ContactRepository::class)
@@ -49,6 +62,8 @@ class Contact
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
+     * 
      */
     private $adresseMail;
 
